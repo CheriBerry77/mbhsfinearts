@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Montgomery Blair Fine Arts Department</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --red: #C8102E;
+      --red-dark: #9e0c24;
+      --red-bright: #e8132f;
+      --black: #0a0a0a;
+      --black-mid: #111111;
+      --black-light: #1a1a1a;
+      --black-border: #2a2a2a;
+      --white: #f5f0eb;
+      --white-dim: #bbb3aa;
+      --gold: #c9a84c;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE TEXTURE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4;
+    }
+
+    /* ── BANNER / HEADER ── */
+    header {
+      background: var(--red);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 2px solid var(--red-dark);
+      box-shadow: 0 4px 40px rgba(200,16,46,0.4);
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      height: 72px;
+    }
+
+    .site-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: var(--white);
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+
+    .site-title span {
+      display: block;
+      font-size: 0.65rem;
+      font-family: 'DM Mono', monospace;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(245,240,235,0.7);
+    }
+
+    nav {
+      display: flex;
+      gap: 0.25rem;
+      align-items: center;
+    }
+
+    nav a {
+      color: var(--white);
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.5rem 0.9rem;
+      border-radius: 2px;
+      transition: background 0.2s;
+    }
+
+    nav a:hover {
+      background: rgba(255,255,255,0.15);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 52vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--black-border);
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 80% at 20% 50%, rgba(200,16,46,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 80% 30%, rgba(200,16,46,0.07) 0%, transparent 60%);
+    }
+
+    .hero-lines {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(90deg, var(--black-border) 1px, transparent 1px),
+        linear-gradient(0deg, var(--black-border) 1px, transparent 1px);
+      background-size: 80px 80px;
+      opacity: 0.25;
+    }
+
+    .hero-content {
+      position: relative;
+      text-align: center;
+      padding: 5rem 2rem;
+      max-width: 800px;
+    }
+
+    .hero-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+      color: var(--white);
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--red);
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--white-dim);
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .hero-rule {
+      width: 48px;
+      height: 3px;
+      background: var(--red);
+      margin: 2rem auto 0;
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 6rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.6rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-subtitle {
+      color: var(--white-dim);
+      font-size: 0.95rem;
+      margin-bottom: 3.5rem;
+      max-width: 540px;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--black-border);
+      margin: 0;
+    }
+
+    /* ── CALENDAR ── */
+    #calendar { border-bottom: 1px solid var(--black-border); }
+
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .event-card {
+      background: var(--black-mid);
+      border: 1px solid var(--black-border);
+      border-radius: 4px;
+      overflow: hidden;
+      display: flex;
+      transition: border-color 0.25s, transform 0.25s;
+      cursor: default;
+    }
+
+    .event-card:hover {
+      border-color: var(--red);
+      transform: translateY(-3px);
+    }
+
+    .event-date-col {
+      background: var(--red);
+      width: 72px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem 0.5rem;
+    }
+
+    .event-month {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(245,240,235,0.75);
+    }
+
+    .event-day {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 900;
+      line-height: 1;
+      color: var(--white);
+    }
+
+    .event-body {
+      padding: 1.25rem 1.4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.3rem;
+    }
+
+    .event-category {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+    }
+
+    .event-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .event-meta {
+      font-size: 0.78rem;
+      color: var(--white-dim);
+    }
+
+    /* ── GALLERY ── */
+    #gallery { border-bottom: 1px solid var(--black-border); }
+
+    .gallery-filter {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+
+    .filter-btn {
+      background: transparent;
+      border: 1px solid var(--black-border);
+      color: var(--white-dim);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.45rem 1rem;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--red);
+      border-color: var(--red);
+      color: var(--white);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+      aspect-ratio: 4/3;
+      background: var(--black-light);
+      border: 1px solid var(--black-border);
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .gallery-item:hover { transform: scale(1.02); }
+
+    .gallery-item:hover .gallery-overlay {
+      opacity: 1;
+    }
+
+    .gallery-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 55%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.2rem;
+    }
+
+    .gallery-overlay-artist {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.2rem;
+    }
+
+    .gallery-overlay-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    /* ── COURSES ── */
+    #courses { }
+
+    .courses-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 2rem;
+    }
+
+    .course-card {
+      background: var(--black-mid);
+      border: 1px solid var(--black-border);
+      border-radius: 4px;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+
+    .course-card:hover {
+      border-color: var(--red);
+      transform: translateY(-3px);
+    }
+
+    .course-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--red);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
+    }
+
+    .course-card:hover::before { transform: scaleX(1); }
+
+    .course-dept-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.75rem;
+    }
+
+    .course-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 0.4rem;
+      color: var(--white);
+    }
+
+    .course-teacher {
+      font-size: 0.8rem;
+      color: var(--white-dim);
+      margin-bottom: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .course-teacher::before {
+      content: '';
+      display: inline-block;
+      width: 18px;
+      height: 1px;
+      background: var(--red);
+    }
+
+    .course-desc {
+      font-size: 0.88rem;
+      color: var(--white-dim);
+      line-height: 1.65;
+      border-top: 1px solid var(--black-border);
+      padding-top: 1rem;
+      margin-top: 1rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--black-mid);
+      border-top: 1px solid var(--black-border);
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.4rem;
+    }
+
+    .footer-sub {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--white-dim);
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-rule {
+      width: 32px;
+      height: 2px;
+      background: var(--red);
+      margin: 0 auto 1.5rem;
+    }
+
+    .footer-copy {
+      font-size: 0.75rem;
+      color: var(--white-dim);
+    }
+
+    /* ── HAMBURGER (mobile) ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      width: 22px;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    .mobile-nav {
+      display: none;
+      background: var(--red-dark);
+      padding: 1rem 2rem;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .mobile-nav a {
+      color: var(--white);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .mobile-nav a:last-child { border-bottom: none; }
+
+    @media (max-width: 700px) {
+      nav { display: none; }
+      .hamburger { display: flex; }
+      .mobile-nav.open { display: flex; }
+      .events-grid, .courses-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 440px) {
+      .gallery-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-content > * {
+      animation: fadeUp 0.7s ease both;
+    }
+    .hero-eyebrow   { animation-delay: 0.1s; }
+    .hero-title     { animation-delay: 0.22s; }
+    .hero-sub       { animation-delay: 0.34s; }
+    .hero-rule      { animation-delay: 0.46s; }
+  </style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header>
+  <div class="header-inner">
+    <div class="site-title">
+      Montgomery Blair
+      <span>Fine Arts Department</span>
+    </div>
+    <nav>
+      <a href="#calendar">Events</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#courses">Courses</a>
+    </nav>
+    <button class="hamburger" aria-label="Toggle menu" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#calendar" onclick="toggleMenu()">Events</a>
+    <a href="#gallery" onclick="toggleMenu()">Gallery</a>
+    <a href="#courses" onclick="toggleMenu()">Courses</a>
+  </div>
+</header>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-lines"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Montgomery Blair High School</p>
+    <h1 class="hero-title">Fine <em>Arts</em></h1>
+    <p class="hero-sub">Celebrating creativity, expression, and artistic excellence in our school community.</p>
+    <div class="hero-rule"></div>
+  </div>
+</div>
+
+<!-- ── CALENDAR ── -->
+<section id="calendar">
+  <p class="section-label">Upcoming</p>
+  <h2 class="section-title">Events &amp; Performances</h2>
+  <p class="section-subtitle">Join us for concerts, exhibitions, performances, and showcases throughout the year.</p>
+
+  <div class="events-grid">
+
+    <div class="event-card">
+      <div class="event-date-col">
+        <span class="event-month">May</span>
+        <span class="event-day">02</span>
+      </div>
+      <div class="event-body">
+        <span class="event-category">Visual Arts</span>
+        <div class="event-name">Spring Art Show</div>
+        <div class="event-meta">6:00 PM · Blair Main Gallery</div>
+      </div>
+    </div>
+
+    <div class="event-card">
+      <div class="event-date-col">
+        <span class="event-month">May</span>
+        <span class="event-day">09</span>
+      </div>
+      <div class="event-body">
+        <span class="event-category">Music</span>
+        <div class="event-name">Spring Band Concert</div>
+        <div class="event-meta">7:30 PM · Blair Auditorium</div>
+      </div>
+    </div>
+
+    <div class="event-card">
+      <div class="event-date-col">
+        <span class="event-month">May</span>
+        <span class="event-day">15</span>
+      </div>
+      <div class="event-body">
+        <span class="event-category">Theatre</span>
+        <div class="event-name">One-Act Play Festival</div>
+        <div class="event-meta">7:00 PM · Black Box Theatre</div>
+      </div>
+    </div>
+
+    <div class="event-card">
+      <div class="event-date-col">
+        <span class="event-month">May</span>
+        <span class="event-day">22</span>
+      </div>
+      <div class="event-body">
+        <span class="event-category">Dance</span>
+        <div class="event-name">Spring Dance Showcase</div>
+        <div class="event-meta">6:30 PM · Blair Auditorium</div>
+      </div>
+    </div>
+
+    <div class="event-card">
+      <div class="event-date-col">
+        <span class="event-month">Jun</span>
+        <span class="event-day">05</span>
+      </div>
+      <div class="event-body">
+        <span class="event-category">Music</span>
+        <div class="event-name">Orchestra Year-End Concert</div>
+        <div class="event-meta">7:30 PM · Blair Auditorium</div>
+      </div>
+    </div>
+
+    <div class="event-card">
+      <div class="event-date-col">
+        <span class="event-month">Jun</span>
+        <span class="event-day">12</span>
+      </div>
+      <div class="event-body">
+        <span class="event-category">Visual Arts</span>
+        <div class="event-name">Senior Portfolio Exhibition</div>
+        <div class="event-meta">5:00 PM · Blair Main Gallery</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── GALLERY ── -->
+<section id="gallery">
+  <p class="section-label">Student Work</p>
+  <h2 class="section-title">Gallery</h2>
+  <p class="section-subtitle">A showcase of artwork created by Montgomery Blair students.</p>
+
+  <div class="gallery-filter">
+    <button class="filter-btn active" onclick="filterGallery('all', this)">All</button>
+    <button class="filter-btn" onclick="filterGallery('painting', this)">Painting</button>
+    <button class="filter-btn" onclick="filterGallery('drawing', this)">Drawing</button>
+    <button class="filter-btn" onclick="filterGallery('photography', this)">Photography</button>
+    <button class="filter-btn" onclick="filterGallery('sculpture', this)">Sculpture</button>
+    <button class="filter-btn" onclick="filterGallery('digital', this)">Digital</button>
+  </div>
+
+  <div class="gallery-grid" id="galleryGrid">
+
+    <div class="gallery-item" data-category="painting">
+      <div class="gallery-placeholder" style="background: linear-gradient(135deg, #1a0a0a 0%, #3d1515 50%, #1a0a0a 100%);">🎨</div>
+      <div class="gallery-overlay">
+        <div class="gallery-overlay-artist">Jordan M. · Grade 11</div>
+        <div class="gallery-overlay-title">Autumn Study in Red</div>
+      </div>
+    </div>
+
+    <div class="gallery-item" data-category="photography">
+      <div class="gallery-placeholder" style="background: linear-gradient(135deg, #0a0a1a 0%, #151535 50%, #0a0a1a 100%);">📷</div>
+      <div class="gallery-overlay">
+        <div class="gallery-overlay-artist">Sam K. · Grade 12</div>
+        <div class="gallery-overlay-title">Urban Geometry</div>
+      </div>
+    </div>
+
+    <div class="gallery-item" data-category="drawing">
+      <div class="gallery-placeholder" style="background: linear-gradient(135deg, #0d0d0d 0%, #252525 50%, #0d0d0d 100%);">✏️</div>
+      <div class="gallery-overlay">
+        <div class="gallery-overlay-artist">Alex R. · Grade 10</div>
+        <div class="gallery-overlay-title">Figure Study No. 4</div>
+      </div>
+    </div>
+
+    <div class="gallery-item" data-category="digital">
+      <div class="gallery-placeholder" style="background: linear-gradient(135deg, #0a1a0a 0%, #153515 50%, #0a1a0a 100%);">💻</div>
+      <div class="gallery-overlay">
+        <div class="gallery-overlay-artist">Casey T. · Grade 11</div>
+        <div class="gallery-overlay-title">Dreamscape III</div>
+      </div>
+    </div>
+
+    <div class="gallery-item" data-category="sculpture">
+      <div class="gallery-placeholder" style="background: linear-gradient(135deg, #1a1a0a 0%, #353515 50%, #1a1a0a 100%);">🏺</div>
+      <div class="gallery-overlay">
+        <div class="gallery-overlay-artist">Morgan L. · Grade 12</div>
+        <div class="gallery-overlay-title">Ceramic Vessel Series</div>
+      </div>
+    </div>
+
+    <div class="gallery-item" data-category="painting">
+      <div class="gallery-placeholder" style="background: linear-gradient(135deg, #1a0a15 0%, #351530 50%, #1a0a15 100%);">🖌️</div>
+      <div class="gallery-overlay">
+        <div class="gallery-overlay-artist">Riley B. · Grade 10</div>
+        <div class="gallery-overlay-title">Abstraction in Blue</div>
+      </div>
+    </div>
+
+    <div class="gallery-item" data-category="photography">
+      <div class="gallery-placeholder" style="background: linear-gradient(135deg, #0a1515 0%, #153030 50%, #0a1515 100%);">🌆</div>
+      <div class="gallery-overlay">
+        <div class="gallery-overlay-artist">Dana P. · Grade 11</div>
+        <div class="gallery-overlay-title">Silver Spring at Dusk</div>
+      </div>
+    </div>
+
+    <div class="gallery-item" data-category="drawing">
+      <div class="gallery-placeholder" style="background: linear-gradient(135deg, #15150a 0%, #303015 50%, #15150a 100%);">🖊️</div>
+      <div class="gallery-overlay">
+        <div class="gallery-overlay-artist">Quinn H. · Grade 12</div>
+        <div class="gallery-overlay-title">Portrait Study</div>
+      </div>
+    </div>
+
+    <div class="gallery-item" data-category="digital">
+      <div class="gallery-placeholder" style="background: linear-gradient(135deg, #15080a 0%, #300f15 50%, #15080a 100%);">🖥️</div>
+      <div class="gallery-overlay">
+        <div class="gallery-overlay-artist">Jamie F. · Grade 9</div>
+        <div class="gallery-overlay-title">Pixel Botanica</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── COURSES ── -->
+<section id="courses">
+  <p class="section-label">Academics</p>
+  <h2 class="section-title">Course Listings</h2>
+  <p class="section-subtitle">Explore our offerings across visual arts, music, theatre, and dance. <strong style="color:var(--red);">1 Fine Arts credit is required for graduation.</strong> Courses marked with * have multiple levels and carry advanced weight toward your GPA.</p>
+
+  <div class="gallery-filter" style="margin-bottom:2.5rem;">
+    <button class="filter-btn active" onclick="filterCourses('all', this)">All</button>
+    <button class="filter-btn" onclick="filterCourses('music', this)">Music</button>
+    <button class="filter-btn" onclick="filterCourses('theatre', this)">Theatre &amp; Dance</button>
+    <button class="filter-btn" onclick="filterCourses('visual', this)">Visual Art</button>
+  </div>
+
+  <div class="courses-grid" id="coursesGrid">
+
+    <!-- ── MUSIC ── -->
+    <div class="course-card" data-dept="music">
+      <div class="course-dept-tag">Music · ART2076 A/B</div>
+      <div class="course-name">AP Music Theory</div>
+      <div class="course-teacher">Mrs. Isabel Hernandez-Cata</div>
+      <div class="course-desc">Learn to recognize, understand, and describe the basic materials and processes of music. Develop skills by listening to, reading, writing, and performing a wide variety of music. Modeled on College Board AP guidelines.</div>
+    </div>
+
+    <div class="course-card" data-dept="music">
+      <div class="course-dept-tag">Music · ART2071–2074 A/B *</div>
+      <div class="course-name">Piano 1–4 *</div>
+      <div class="course-teacher">Mrs. Isabel Hernandez-Cata</div>
+      <div class="course-desc">No experience needed for Piano 1 — great for beginners who want to learn how to play an instrument. Four progressive levels match all experience ranges, from first-time players to advanced pianists.</div>
+    </div>
+
+    <div class="course-card" data-dept="music">
+      <div class="course-dept-tag">Music · ART2082–2081 A/B *</div>
+      <div class="course-name">Guitar 1–4 *</div>
+      <div class="course-teacher">Mr. Christopher Mercado</div>
+      <div class="course-desc">An introduction to notes, rhythms, chords, scales, music theory, and songwriting. Students leave able to play full songs across genres, read guitar sheet music, perform solos, improvise riffs, and compose basic pieces.</div>
+    </div>
+
+    <div class="course-card" data-dept="music">
+      <div class="course-dept-tag">Music · ART2092 A/B</div>
+      <div class="course-name">World Drumming</div>
+      <div class="course-teacher">Mr. Raife Oldham</div>
+      <div class="course-desc">An exploration of percussion traditions from around the world, covering drumming techniques, rhythmic styles, and the cultural contexts of music from Africa, Latin America, and beyond.</div>
+    </div>
+
+    <div class="course-card" data-dept="music">
+      <div class="course-dept-tag">Music · ART2084 A/B</div>
+      <div class="course-name">Music Technology</div>
+      <div class="course-teacher">Ms. Michelle Roberts</div>
+      <div class="course-desc">Create your own drum patterns, bass lines, chord progressions, and melodies using tools including Audacity, Sibelius, GarageBand, and Reason. Topics span music production, copyright law, acoustics, and recording studio techniques.</div>
+    </div>
+
+    <div class="course-card" data-dept="music">
+      <div class="course-dept-tag">Music · ART2093 / 2094 / 2154 A/B *</div>
+      <div class="course-name">Band (Concert / Symphonic / Wind Ensemble) *</div>
+      <div class="course-teacher">Mr. Raife Oldham</div>
+      <div class="course-desc">Three leveled ensembles for wind, brass, and percussion players. Students develop technical proficiency, ensemble listening, and performance skills across a broad repertoire from marches to contemporary concert works.</div>
+    </div>
+
+    <div class="course-card" data-dept="music">
+      <div class="course-dept-tag">Music · ART2097 / 2099 / 2155 A/B *</div>
+      <div class="course-name">Orchestra (Concert / Symphonic / Philharmonic) *</div>
+      <div class="course-teacher">Ms. Michelle Roberts</div>
+      <div class="course-desc">Three leveled orchestras for string and full ensemble players, exploring orchestral literature from Baroque through modern eras. Students build technical mastery, sight-reading, and ensemble artistry through regular performance.</div>
+    </div>
+
+    <div class="course-card" data-dept="music">
+      <div class="course-dept-tag">Music · ART2100 A/B</div>
+      <div class="course-name">Jazz Ensemble</div>
+      <div class="course-teacher">Ms. Michelle Roberts</div>
+      <div class="course-desc">An ensemble focused on jazz performance, improvisation, and the traditions of the genre. Students explore big band literature, small-group jazz styles, and develop improvisational vocabulary through active ensemble playing.</div>
+    </div>
+
+    <div class="course-card" data-dept="music">
+      <div class="course-dept-tag">Music · ART2087–2090 / 2091 A/B *</div>
+      <div class="course-name">Chorus 1–3, Show Choir &amp; Chamber Singers *</div>
+      <div class="course-teacher">Mrs. Isabel Hernandez-Cata</div>
+      <div class="course-desc">No experience needed for Chorus 1 — students just need to love to sing. Auditions are required for advanced levels. Show Choir and Chamber Singers match students to higher-level vocal and performance challenges.</div>
+    </div>
+
+    <!-- ── THEATRE & DANCE ── -->
+    <div class="course-card" data-dept="theatre">
+      <div class="course-dept-tag">Theatre · ART2106–2107 A/B *</div>
+      <div class="course-name">Theatre 1–2 *</div>
+      <div class="course-teacher">Theatre Department</div>
+      <div class="course-desc">Units include improvisation, scene studies, musical theatre, stage combat, world theatre history, and silent film. A new ESOL Theatre 1 section is also available for English language learners.</div>
+    </div>
+
+    <div class="course-card" data-dept="theatre">
+      <div class="course-dept-tag">Theatre · ART2103 A/B</div>
+      <div class="course-name">Advanced Acting</div>
+      <div class="course-teacher">Theatre Department</div>
+      <div class="course-desc">Builds on skills from Theatre 1 &amp; 2. Includes advanced monologue and scene work, script analysis, and directing for stage and screen. Emphasis on developing a personal acting process and artistic voice.</div>
+    </div>
+
+    <div class="course-card" data-dept="theatre">
+      <div class="course-dept-tag">Theatre · ART2104 A/B</div>
+      <div class="course-name">Stage Design</div>
+      <div class="course-teacher">Theatre Department</div>
+      <div class="course-desc">An exploration of scenic design, set construction, lighting, and the visual elements of theatrical production. Students develop design concepts and learn the technical skills needed to bring a production to life.</div>
+    </div>
+
+    <div class="course-card" data-dept="theatre">
+      <div class="course-dept-tag">Theatre · ART2105 A/B</div>
+      <div class="course-name">Play Directing</div>
+      <div class="course-teacher">Theatre Department</div>
+      <div class="course-desc">Students study and practice the craft of directing for stage and screen, including script analysis, working with actors, staging, and the director's role in the full production process.</div>
+    </div>
+
+    <div class="course-card" data-dept="theatre">
+      <div class="course-dept-tag">Dance · ART2000 A/B</div>
+      <div class="course-name">Dance as a Fine Art</div>
+      <div class="course-teacher">Dance Department</div>
+      <div class="course-desc">This introductory course develops technique and explores dance as a fine art. Students learn basic technical skills across multiple disciplines and the history of dance in many cultures. Dance B deepens these elements through original choreography and improvisation. May be repeated for elective credit.</div>
+    </div>
+
+    <!-- ── VISUAL ART ── -->
+    <div class="course-card" data-dept="visual">
+      <div class="course-dept-tag">Visual Art · ART2054 A/B</div>
+      <div class="course-name">AP Art History</div>
+      <div class="course-teacher">Visual Art Department</div>
+      <div class="course-desc">Learn about 5,000 years of art history from ancient art through the 21st century. Modeled on College Board guidelines and AP testing requirements, this course develops visual analysis and critical thinking skills.</div>
+    </div>
+
+    <div class="course-card" data-dept="visual">
+      <div class="course-dept-tag">Visual Art · ART2064 A/B</div>
+      <div class="course-name">AP Studio Art 2D</div>
+      <div class="course-teacher">Visual Art Department</div>
+      <div class="course-desc">Develop a body of work based on your own theme. A year-long course culminating in a portfolio of 20 images that demonstrate finished artworks, artistic processes, revision, and experimentation.</div>
+    </div>
+
+    <div class="course-card" data-dept="visual">
+      <div class="course-dept-tag">Visual Art · ART2040 A/B</div>
+      <div class="course-name">AP Photography</div>
+      <div class="course-teacher">Visual Art Department</div>
+      <div class="course-desc">An advanced portfolio-based course in which students develop a cohesive body of photographic work around a self-directed theme, submitted as a 20-image portfolio for AP evaluation.</div>
+    </div>
+
+    <div class="course-card" data-dept="visual">
+      <div class="course-dept-tag">Visual Art · ART2001 A/B</div>
+      <div class="course-name">Foundations of Art &amp; Culture</div>
+      <div class="course-teacher">Visual Art Department</div>
+      <div class="course-desc">Learn and create a wide variety of artworks using many different mediums, including drawing, painting, crafts, and sculpture. A great entry point for students new to visual art.</div>
+    </div>
+
+    <div class="course-card" data-dept="visual">
+      <div class="course-dept-tag">Visual Art · ART2053 / 2049 A/B</div>
+      <div class="course-name">Functional Fine Art &amp; Craft</div>
+      <div class="course-teacher">Visual Art Department</div>
+      <div class="course-desc">Learn and create with traditional and contemporary materials including basketry, fibers, glass, jewelry, metal, mixed media, paper, pottery, wearable art, and wood. An Advanced FFAC section is also offered.</div>
+    </div>
+
+    <div class="course-card" data-dept="visual">
+      <div class="course-dept-tag">Visual Art · ART2022 A/B</div>
+      <div class="course-name">Fashion Illustration</div>
+      <div class="course-teacher">Visual Art Department</div>
+      <div class="course-desc">Explore contemporary fashion and fabric design using various materials and techniques. Develop an understanding of the fashion industry and the range of career opportunities it offers.</div>
+    </div>
+
+    <div class="course-card" data-dept="visual">
+      <div class="course-dept-tag">Visual Art · ART2038–2035 / 2040 A/B *</div>
+      <div class="course-name">Photography 1–4 &amp; AP *</div>
+      <div class="course-teacher">Visual Art Department</div>
+      <div class="course-desc">Learn to take stunning photographs regardless of camera type. Explore aperture, shutter speed, ISO, composition, analog film/darkroom photography, digital photography, and Photoshop. Five levels from beginner to AP.</div>
+    </div>
+
+    <div class="course-card" data-dept="visual">
+      <div class="course-dept-tag">Visual Art · ART2045–2048 A/B *</div>
+      <div class="course-name">Ceramics &amp; Sculpture 1–4 *</div>
+      <div class="course-teacher">Visual Art Department</div>
+      <div class="course-desc">Learn hand-building skills while working in clay and other 3D mediums to create art. Four progressive levels develop technique from foundational coil and slab methods through advanced wheel-throwing and sculptural forms.</div>
+    </div>
+
+    <div class="course-card" data-dept="visual">
+      <div class="course-dept-tag">Visual Art · ART2069–2060 A/B *</div>
+      <div class="course-name">Digital Art 1–4 *</div>
+      <div class="course-teacher">Visual Art Department</div>
+      <div class="course-desc">Create art using the Adobe Creative Suite (Illustrator, Photoshop, InDesign). Projects span collage, drawing, illustration, portrait, typography, photomanipulation, publication, painting, animation, and product design.</div>
+    </div>
+
+    <div class="course-card" data-dept="visual">
+      <div class="course-dept-tag">Visual Art · ART2061 A/B</div>
+      <div class="course-name">Animation (Advanced)</div>
+      <div class="course-teacher">Visual Art Department</div>
+      <div class="course-desc">Create animations using Adobe Animate and the Adobe Creative Suite. Projects include rotoscoping, traditional animation, stop motion, claymation, and motion graphics.</div>
+    </div>
+
+    <div class="course-card" data-dept="visual">
+      <div class="course-dept-tag">Visual Art · ART2042–2033 A/B *</div>
+      <div class="course-name">Studio Art 1–4 *</div>
+      <div class="course-teacher">Visual Art Department</div>
+      <div class="course-desc">Learn observational drawing using graphite, colored pencil, charcoal, pastel, ink, acrylic, watercolor, tempera, collage, and mixed media. Themes include portraiture, still life, landscape, illustration, realism, and abstraction.</div>
+    </div>
+
+    <div class="course-card" data-dept="visual">
+      <div class="course-dept-tag">Visual Art · ART2043 A/B</div>
+      <div class="course-name">Painting</div>
+      <div class="course-teacher">Visual Art Department</div>
+      <div class="course-desc">Learn to paint landscapes, portraits, still life, abstraction, and more using tempera, acrylic, watercolor, and mixed media. Themes explore dotilism, realism, and personal perception.</div>
+    </div>
+
+    <div class="course-card" data-dept="visual">
+      <div class="course-dept-tag">Visual Art · ART2044 A/B</div>
+      <div class="course-name">Printmaking</div>
+      <div class="course-teacher">Visual Art Department</div>
+      <div class="course-desc">Learn a unique art form that transfers images from one surface to another. Techniques include lino printing, engraving, stamp-making, and screen printing to create a variety of original printed works.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Montgomery Blair Fine Arts</div>
+    <div class="footer-sub">51 University Blvd E · Silver Spring, MD 20901</div>
+    <div class="footer-rule"></div>
+    <div class="footer-copy">&copy; 2025 Montgomery Blair High School Fine Arts Department</div>
+  </div>
+</footer>
+
+<script>
+  function toggleMenu() {
+    document.getElementById('mobileNav').classList.toggle('open');
+  }
+
+  function filterCourses(dept, btn) {
+    document.querySelectorAll('#courses .filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.course-card').forEach(card => {
+      if (dept === 'all' || card.dataset.dept === dept) {
+        card.style.display = '';
+        card.style.animation = 'fadeUp 0.4s ease both';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  function filterGallery(category, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    document.querySelectorAll('.gallery-item').forEach(item => {
+      if (category === 'all' || item.dataset.category === category) {
+        item.style.display = '';
+        item.style.animation = 'fadeUp 0.4s ease both';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  }
+</script>
+
+</body>
+</html>
